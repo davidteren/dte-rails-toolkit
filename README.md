@@ -1,5 +1,10 @@
 # dte-rails-toolkit
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-8A63D2.svg)](https://docs.claude.com/en/docs/claude-code)
+[![checkers](https://img.shields.io/badge/checkers-2-success.svg)](#skills)
+[![verified both ways](https://img.shields.io/badge/verified-both%20ways-success.svg)](#how-its-built-the-bar-for-adding-a-checker)
+
 **A general-purpose toolkit of runnable, deterministic Rails checkers** — CI-friendly
 linters that catch the failures that produce *no error* (the code runs, the tests pass,
 something is just quietly wrong).
