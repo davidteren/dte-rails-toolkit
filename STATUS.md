@@ -9,7 +9,7 @@ here, and a category graduates into its own focused plugin once mature (as the H
 complements the LLM-driven toolchain — and the grounding pre-pass that
 [dte-skills](https://github.com/davidteren/dte-skills) runs before its review lenses.
 
-**Current:** **v0.1.1**, 2 skills, public. Install: `claude plugin marketplace add davidteren/dte-rails-toolkit`
+**Current:** **v0.2.0**, 5 skills, public. Install: `claude plugin marketplace add davidteren/dte-rails-toolkit`
 → `claude plugin install dte-rails-toolkit@dte-rails-toolkit-marketplace`.
 
 ---
@@ -20,6 +20,9 @@ complements the LLM-driven toolchain — and the grounding pre-pass that
 |---|---|---|
 | `layer-boundary-lint` | Rails layering violations: `Current.` read in models, `request`/`params` in the domain layer (services **and** interactors), raw `.where/.order/.joins/.pluck` in controllers/views, mailer/HTTP I/O in `after_*` callbacks, off-layer `Current` writes, oversized `Current` | `lint_layer_boundaries.sh` (bash + python3) |
 | `rails-test-smell-checker` | Test smells (Minitest **and** RSpec): `sleep` in system tests, missing `disable_net_connect!`, stubbing the SUT, `has_css?`/`has_content?` in an assertion; caveated heuristics (Mystery Guest, tautological eq) | `lint_test_smells.sh` (python3) |
+| `rails-n1-guardrail-check` | Asserts N+1 *defenses exist* (no `strict_loading`/detection gem wired) + flags `.count` on an association in views/loops and relation-breakers (`.order/.first/.pluck`) inside `.each`. NOT a general N+1 detector (Bullet/Prosopite own that) | `lint_n1_guardrails.sh` (bash + python3) |
+| `rails-csv-io` | CSV import/export footguns: whole-file `CSV.read`/`parse(File.read` (memory), missing `encoding:`/BOM, bang-persist in a row loop with no transaction + no per-row error reporting. Ships a streaming-importer + exporter template | `lint_csv_io.sh` (bash + python3) |
+| `cable-stream-security` | ActionCable / Turbo-Stream hardening: a channel that `stream_from`s without authorizing/`reject`, `constantize` on client-supplied `params`/`dataset`, missing `allowed_request_origins`, absent CSP `connect-src` | `lint_cable_security.sh` (bash + python3) |
 
 **Provenance:** distilled from a review of Rails reference books (palkan's *Layered Design for Rails*,
 thoughtbot's *Testing Rails*) in the [Rails skills analysis](https://github.com/davidteren/dte-skills) lineage.
@@ -35,6 +38,11 @@ new topics/coders — this repo is that layer.
 - **v0.1.1** (2026-06-28) — skill-lint clean: the keystone linter (palkan `reference.toc` + `no-orphans`)
   flagged both reference guides (a >100-line guide needs a `## Contents`; the guide must be a real markdown
   link from SKILL.md, not a backtick mention). Fixed → 2 pass / 0 fail, Plugin-wide PASS.
+- **v0.2.0** (2026-06-28) — cleared the backlog's 3 Tier-2 checkers: `rails-n1-guardrail-check`,
+  `rails-csv-io`, `cable-stream-security`. Each verified both ways + skill-lint clean (3 pass / 0 fail).
+  Real bug caught on `miela_app` at build: `rails-csv-io` flagged `app/jobs/sync_all_users_job.rb:46`
+  (bang-persist in a `CSV.foreach` with no transaction + no per-row reporting — a bad row aborts the job
+  after committing earlier rows). 5 skills total.
 
 ## Wired into
 
@@ -49,15 +57,15 @@ new topics/coders — this repo is that layer.
 Status: ☐ todo · ◐ designed/parked · ▶ next.
 
 ### Checker candidates (from the Books review — `dte-skills:Books/learnings/00_INDEX.md`, Tier-2)
-- ☐ **rails-n1-guardrail-check** — assert N+1 *defenses exist* (config presence + 2 narrow grep patterns).
-  NOT a general N+1 detector (Bullet/Prosopite own that).
-- ☐ **rails-csv-io** — streaming import/export template + 3-footgun checker (whole-file load, encoding/BOM,
-  `create!`-in-loop with no transaction/row-error collection).
-- ☐ **cable-stream-security** — websocket/Turbo-Stream hardening checker (signed stream ids, reject
-  unauthorized subs, `allowed_request_origins`, never `constantize` client strings). Stack-agnostic.
-- ◐ **geocoding-guard** / **ruby-hotspot-finder** — the Books review recommended folding these into existing
-  skills (performance-reviewer / rails-testing-v8 / dte-tooling-scan) rather than standalone; park here only
-  if that proves wrong.
+- ☑ **rails-n1-guardrail-check** — shipped v0.2.0.
+- ☑ **rails-csv-io** — shipped v0.2.0.
+- ☑ **cable-stream-security** — shipped v0.2.0.
+- ◐ **geocoding-guard** / **ruby-hotspot-finder** — **staying parked.** The Books review recommended folding
+  these into existing skills (performance-reviewer / rails-testing-v8 / dte-tooling-scan) rather than minting
+  standalone checkers; build here only if that fold proves insufficient. Not a TODO.
+
+_(The Tier-1 checkers — layer-boundary-lint, rails-test-smell-checker, plus turbo-frames-patterns which went
+to hotwire-rails-toolkit — shipped earlier. The full candidate list + tiers live in the Books rollup.)_
 
 ### Graduation rule
 When a category here has enough mature, verified checkers to stand alone (e.g. a cluster of

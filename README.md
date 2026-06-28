@@ -1,8 +1,9 @@
 # dte-rails-toolkit
 
+[![Site](https://img.shields.io/badge/site-davidteren.github.io-e74c3c.svg)](https://davidteren.github.io/dte-rails-toolkit/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-8A63D2.svg)](https://docs.claude.com/en/docs/claude-code)
-[![checkers](https://img.shields.io/badge/checkers-2-success.svg)](#skills)
+[![checkers](https://img.shields.io/badge/checkers-5-success.svg)](#skills)
 [![verified both ways](https://img.shields.io/badge/verified-both%20ways-success.svg)](#how-its-built-the-bar-for-adding-a-checker)
 
 **A general-purpose toolkit of runnable, deterministic Rails checkers** — CI-friendly
@@ -23,6 +24,9 @@ runs them before its lenses).
 |---|---|---|
 | **layer-boundary-lint** | Rails **layering violations** the architecture books describe but no tool gates: `Current.` read in models, `request`/`params` in the domain layer (services **and** interactors), raw `.where/.order/.joins` in controllers/views, mailer/HTTP I/O in `after_*` callbacks, off-layer `Current` writes, oversized `Current` | `lint_layer_boundaries.sh` (bash + python3) · reference guide |
 | **rails-test-smell-checker** | **test smells** (Minitest **and** RSpec): `sleep` in system tests, missing `WebMock.disable_net_connect!`, stubbing the SUT, `has_css?`/`has_content?` inside an assertion, plus caveated heuristics (Mystery Guest) | `lint_test_smells.sh` (python3) · reference guide |
+| **rails-n1-guardrail-check** | **N+1 defenses**: no `strict_loading`/detection gem wired, `.count` on an association in views/loops, relation-breakers (`.order/.first/.pluck`) inside `.each`. Asserts guardrails *exist* — not a general detector (Bullet/Prosopite own that) | `lint_n1_guardrails.sh` (bash + python3) · reference guide |
+| **rails-csv-io** | **CSV import/export footguns**: whole-file `CSV.read` (memory), missing `encoding:`/BOM, bang-persist in a row loop with no transaction + no per-row error reporting | `lint_csv_io.sh` (bash + python3) · guide + streaming template |
+| **cable-stream-security** | **ActionCable / Turbo-Stream hardening**: `stream_from` without authorizing/`reject`, `constantize` on client `params`/`dataset`, missing `allowed_request_origins`, absent CSP `connect-src` | `lint_cable_security.sh` (bash + python3) · reference guide |
 
 ## Using it
 
