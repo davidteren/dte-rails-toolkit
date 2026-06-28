@@ -47,6 +47,8 @@
   .skip:focus { left: 0; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
+  /* links sitting inside text need a non-color cue (a11y) */
+  .sub a, footer .frow a { text-decoration: underline; text-underline-offset: 2px; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
 
@@ -77,8 +79,9 @@
   .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
   .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.15rem;
     border-radius: 8px; font-weight: 600; font-size: .92rem; border: 1px solid transparent; cursor: pointer; }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-dim); text-decoration: none; }
+  .btn-primary { background: var(--accent-dim); color: #fff; }
+  .btn-primary:hover { background: #a52617; text-decoration: none; }
+  [data-theme="light"] .btn-primary:hover { background: #8f2017; }
   .btn-ghost { background: var(--bg-elev); color: var(--text); border-color: var(--border); }
   .btn-ghost:hover { border-color: var(--text-dim); text-decoration: none; }
 
@@ -109,7 +112,8 @@
   .card p { margin: 0 0 1rem; color: var(--text-dim); font-size: .92rem; }
   .card .ships { font-family: var(--mono); font-size: .78rem; color: var(--text-dim);
     border-top: 1px solid var(--border); padding-top: .85rem; }
-  .card .ships code { color: var(--accent); background: var(--bg-elev2); padding: .1rem .35rem; border-radius: 4px; }
+  .card .ships code { color: var(--accent); background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  [data-theme="light"] .card .ships code { color: #fff; }
   ul.catch { list-style: none; margin: 0 0 1rem; padding: 0; }
   ul.catch li { position: relative; padding-left: 1.4rem; font-size: .9rem; color: var(--text-dim);
     margin-bottom: .4rem; }
@@ -121,7 +125,7 @@
   .bar { display: grid; gap: 1rem; grid-template-columns: 1fr; }
   @media (min-width: 720px) { .bar { grid-template-columns: repeat(3, 1fr); } }
   .bar .item { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; }
-  .bar .item h4 { margin: 0 0 .4rem; font-size: .98rem; }
+  .bar .item h3 { margin: 0 0 .4rem; font-size: .98rem; font-family: var(--sans); color: var(--text); }
   .bar .item p { margin: 0; color: var(--text-dim); font-size: .88rem; }
 
   /* roadmap */
@@ -230,15 +234,15 @@ claude plugin install <span class="p">dte-rails-toolkit@dte-rails-toolkit-market
       <p class="sub">Three rules. A checker ships only if it clears all three.</p>
       <div class="bar">
         <div class="item">
-          <h4>Deterministic, names its ceiling</h4>
+          <h3>Deterministic, names its ceiling</h3>
           <p>Heuristic text/AST scans, not full parsers — each script says so. A clean run is a gate, not a proof.</p>
         </div>
         <div class="item">
-          <h4>Verified both ways</h4>
+          <h3>Verified both ways</h3>
           <p>Run against a real app (must be truthful — no false positives) and a synthetic broken case (must flag it).</p>
         </div>
         <div class="item">
-          <h4>False positives are the failure mode</h4>
+          <h3>False positives are the failure mode</h3>
           <p>A rule that can't be made high-confidence cheaply is demoted to a caveated heuristic or dropped — never shipped loose.</p>
         </div>
       </div>
