@@ -54,18 +54,16 @@ new topics/coders — this repo is that layer.
 
 ## Backlog 🔭
 
-Status: ☐ todo · ◐ designed/parked · ▶ next.
+Status: ☐ todo · ◐ designed/parked · ▶ next. _(Shipped checkers move to `## Releases` — this lists only
+open candidates.)_
 
 ### Checker candidates (from the Books review — `dte-skills:Books/learnings/00_INDEX.md`, Tier-2)
-- ☑ **rails-n1-guardrail-check** — shipped v0.2.0.
-- ☑ **rails-csv-io** — shipped v0.2.0.
-- ☑ **cable-stream-security** — shipped v0.2.0.
 - ◐ **geocoding-guard** / **ruby-hotspot-finder** — **staying parked.** The Books review recommended folding
   these into existing skills (performance-reviewer / rails-testing-v8 / dte-tooling-scan) rather than minting
   standalone checkers; build here only if that fold proves insufficient. Not a TODO.
 
-_(The Tier-1 checkers — layer-boundary-lint, rails-test-smell-checker, plus turbo-frames-patterns which went
-to hotwire-rails-toolkit — shipped earlier. The full candidate list + tiers live in the Books rollup.)_
+_(The v0.2.0 batch — `rails-n1-guardrail-check`, `rails-csv-io`, `cable-stream-security` — graduated to
+Shipped; the full candidate list + tiers live in the Books rollup.)_
 
 ### Graduation rule
 When a category here has enough mature, verified checkers to stand alone (e.g. a cluster of
