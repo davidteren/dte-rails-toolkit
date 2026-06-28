@@ -1,0 +1,8 @@
+{
+  "name": "dte-rails-toolkit",
+  "version": "0.1.0",
+  "description": "A general-purpose toolkit of runnable, deterministic Rails checkers — CI-friendly linters that flag the failures that produce no error. A staging home for individual checkers/skills until a category has enough to graduate into its own focused plugin (as the Hotwire checkers did into hotwire-rails-toolkit). Currently ships layer-boundary-lint (Rails layering violations) and rails-test-smell-checker (Minitest + RSpec test smells). Each checker is verified both ways: truthful on a real app and flags a synthetic break.",
+  "author": { "name": "David Teren" },
+  "homepage": "https://github.com/davidteren/dte-rails-toolkit",
+  "keywords": ["rails", "linter", "checker", "static-analysis", "architecture", "layered", "testing", "test-smells", "ci"]
+}

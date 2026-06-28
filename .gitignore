@@ -1,0 +1,13 @@
+# OS / editor / tooling cruft
+.DS_Store
+.idea/
+*.log
+
+# Node / build (if docs tooling is added later)
+node_modules/
+dist/
+build/
+
+# Scratch
+scratchpad/
+tmp/
