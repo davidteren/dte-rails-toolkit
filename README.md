@@ -6,7 +6,20 @@
 [![checkers](https://img.shields.io/badge/checkers-5-success.svg)](#skills)
 [![verified both ways](https://img.shields.io/badge/verified-both%20ways-success.svg)](#how-its-built-the-bar-for-adding-a-checker)
 
-[![dte-rails-toolkit site](./docs/screenshot.png)](https://davidteren.github.io/dte-rails-toolkit/)
+<a href="https://davidteren.github.io/dte-rails-toolkit/">
+<table>
+  <tr>
+    <td width="50%"><img src="./docs/screenshot-dark.png" alt="dte-rails-toolkit — dark"></td>
+    <td width="50%"><img src="./docs/screenshot-light.png" alt="dte-rails-toolkit — light"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>🌙 dark</sub></td>
+    <td align="center"><sub>☀️ light</sub></td>
+  </tr>
+</table>
+</a>
+
+<sub>Dark / light theme toggle on the <a href="https://davidteren.github.io/dte-rails-toolkit/">live site</a> — persists your choice, respects <code>prefers-color-scheme</code>.</sub>
 
 **A general-purpose toolkit of runnable, deterministic Rails checkers** — CI-friendly
 linters that catch the failures that produce *no error* (the code runs, the tests pass,
