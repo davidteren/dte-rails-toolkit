@@ -1,0 +1,53 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e74c3c"/>
+      <stop offset="1" stop-color="#c0392b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="6" fill="url(#glow)"/>
+
+  <!-- terminal brand -->
+  <text x="80" y="120" font-family="ui-monospace, Menlo, monospace" font-size="30" font-weight="600">
+    <tspan fill="#e74c3c">$</tspan><tspan fill="#e6edf3"> dte-rails-toolkit</tspan>
+  </text>
+
+  <!-- headline -->
+  <text x="80" y="280" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" fill="#e6edf3" letter-spacing="-2">Catch the bugs that</text>
+  <text x="80" y="380" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" letter-spacing="-2" xml:space="preserve"><tspan fill="#e6edf3">produce&#160; </tspan><tspan fill="#e74c3c">no error.</tspan></text>
+
+  <!-- subhead -->
+  <text x="80" y="450" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">Runnable, deterministic Rails checkers. CI-friendly linters</text>
+  <text x="80" y="492" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">for the failures where the code runs and tests pass.</text>
+
+  <!-- pills -->
+  <g font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa7b4">
+    <rect x="80" y="540" width="155" height="44" rx="22" fill="#161b22" stroke="#2a3038"/>
+    <circle cx="108" cy="562" r="5" fill="#3fb950"/>
+    <text x="124" y="569">v0.1.1</text>
+
+    <rect x="251" y="540" width="110" height="44" rx="22" fill="#161b22" stroke="#2a3038"/>
+    <text x="271" y="569">MIT</text>
+
+    <rect x="377" y="540" width="200" height="44" rx="22" fill="#161b22" stroke="#2a3038"/>
+    <text x="397" y="569">2 checkers</text>
+  </g>
+
+  <!-- drawn rail-track mark (rsvg has no emoji font) -->
+  <g stroke="#e74c3c" stroke-width="9" stroke-linecap="round" opacity="0.85">
+    <line x1="1010" y1="90" x2="1010" y2="250"/>
+    <line x1="1100" y1="90" x2="1100" y2="250"/>
+    <g stroke="#9aa7b4" stroke-width="7" opacity="0.55">
+      <line x1="995" y1="115" x2="1115" y2="115"/>
+      <line x1="995" y1="155" x2="1115" y2="155"/>
+      <line x1="995" y1="195" x2="1115" y2="195"/>
+      <line x1="995" y1="235" x2="1115" y2="235"/>
+    </g>
+  </g>
+</svg>
