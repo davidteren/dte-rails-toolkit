@@ -1,0 +1,27 @@
+hooks/pre-push
+  s_a526102195a0a2::t_d9f541448fab6d 1-15
+scripts/skill_lint.py
+  s_a526102195a0a2::t_d3fe687ef6f15f 1-176
+AGENTS.md
+  s_a526102195a0a2::t_1b26367a277b38 57-70
+.claude-plugin/marketplace.json
+  s_a526102195a0a2::t_a158f9a489f465 4
+.claude-plugin/plugin.json
+  s_a526102195a0a2::t_ce26a74e534ca3 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "d040b677c8a68ad9d71942b4033983e1d602f444",
+  "prompts": {},
+  "sessions": {
+    "s_a526102195a0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aafbb10f-22c1-4c10-99ee-920c290685ff",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    }
+  }
+}
