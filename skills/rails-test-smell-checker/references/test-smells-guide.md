@@ -5,6 +5,11 @@ Grounded in thoughtbot's *Testing Rails* "Antipatterns" chapter (see
 **why** it's a problem, **the fix**. Rules are split by confidence — HIGH ones
 fail CI; HEURISTIC ones are caveated and need a human glance.
 
+## Contents
+
+- The red-first principle · HIGH: `sleep-in-feature`, `missing-net-guard`, `stub-the-sut`,
+  `predicate-in-assertion` · HEURISTIC: `mystery-guest`, `tautological-eq` · Deliberately not flagged
+
 ## The principle behind all of it: red-first
 
 A test that has never failed has never been shown to test anything. If you

@@ -10,6 +10,11 @@ The four layers (inbound → domain → data → infrastructure) have one direct
 dependency: upper layers may know about lower ones, never the reverse. Most rules
 here catch a *reverse* dependency or a layer doing another layer's job.
 
+## Contents
+
+- `current-in-models`, `request-in-domain`, `query-in-controller`, `io-in-callback`,
+  `current-write-location` (hard rules) · `skip-action`, `current-attr-count` (advisory) · Running
+
 ---
 
 ## `current-in-models` — `Current.<attr>` read inside `app/models/**`  (hard)

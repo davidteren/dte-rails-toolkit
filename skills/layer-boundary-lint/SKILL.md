@@ -9,7 +9,7 @@ A runnable grep-based gate for the **mechanically-detectable** layer violations
 the *Layered Design for Rails* book names. The `layered-rails` plugin documents
 every one of these as prose and ships no executable check; this is that check.
 
-Full per-rule rationale and fixes: `references/layer-boundaries-guide.md`.
+Full per-rule rationale and fixes: [`references/layer-boundaries-guide.md`](references/layer-boundaries-guide.md).
 
 ## When to use
 

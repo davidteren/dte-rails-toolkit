@@ -51,7 +51,7 @@ heuristics under `--strict`), `2` = bad usage / no `python3`.
 - Tautological equality: `expect(x).to eq(x)` / `assert_equal x, x`.
 
 Full what/why/fix for each, and the **red-first** principle behind them, in
-`references/test-smells-guide.md`.
+[`references/test-smells-guide.md`](references/test-smells-guide.md).
 
 ## Ceiling
 
