@@ -1,0 +1,23 @@
+README.md
+  s_a526102195a0a2::t_8d016a90e21551 3-7
+CLAUDE.md
+  s_a526102195a0a2::t_c1d3af360a90dc 1-9
+AGENTS.md
+  s_a526102195a0a2::t_70dea41d927dba 1-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "fe35d2353faf7d1300d32addfa40068de28a60b8",
+  "prompts": {},
+  "sessions": {
+    "s_a526102195a0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aafbb10f-22c1-4c10-99ee-920c290685ff",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    }
+  }
+}
