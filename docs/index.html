@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dte-rails-toolkit — deterministic Rails checkers</title>
+<meta name="description" content="A toolkit of runnable, deterministic Rails checkers — CI-friendly linters that catch the failures that produce no error.">
+<meta property="og:title" content="dte-rails-toolkit">
+<meta property="og:description" content="Runnable, deterministic Rails checkers — linters that catch the failures that produce no error.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛤️</text></svg>">
+<style>
+  :root {
+    --bg: #0d1117; --bg-elev: #161b22; --bg-elev2: #1c2230;
+    --border: #2a3038; --text: #e6edf3; --text-dim: #9aa7b4;
+    --accent: #e74c3c; --accent-dim: #c0392b; --ok: #3fb950;
+    --code-bg: #010409; --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius: 10px; --maxw: 960px;
+  }
+  [data-theme="light"] {
+    --bg: #ffffff; --bg-elev: #f6f8fa; --bg-elev2: #eef1f5;
+    --border: #d0d7de; --text: #1f2328; --text-dim: #59636e;
+    --accent: #d63426; --accent-dim: #b02a1f; --ok: #1a7f37;
+    --code-bg: #0d1117;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--accent); color: #fff;
+    padding: .6rem 1rem; border-radius: 0 0 var(--radius) 0; z-index: 100; }
+  .skip:focus { left: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+  /* header */
+  header { border-bottom: 1px solid var(--border); position: sticky; top: 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); z-index: 50; }
+  .nav { display: flex; align-items: center; gap: 1rem; padding: .75rem 0; }
+  .brand { font-family: var(--mono); font-weight: 600; font-size: 1rem; color: var(--text); }
+  .brand .pre { color: var(--accent); }
+  .nav-links { margin-left: auto; display: flex; gap: 1.25rem; align-items: center; }
+  .nav-links a { color: var(--text-dim); font-size: .9rem; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .theme-btn { background: none; border: 1px solid var(--border); color: var(--text-dim);
+    border-radius: 8px; width: 36px; height: 32px; cursor: pointer; font-size: 1rem; line-height: 1; }
+  .theme-btn:hover { color: var(--text); border-color: var(--text-dim); }
+
+  /* hero */
+  .hero { padding: 4.5rem 0 3rem; }
+  .tag { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--mono);
+    font-size: .78rem; color: var(--text-dim); border: 1px solid var(--border);
+    background: var(--bg-elev); padding: .3rem .7rem; border-radius: 99px; margin-bottom: 1.5rem; }
+  .tag .dot { width: 7px; height: 7px; border-radius: 99px; background: var(--ok); }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.1; margin: 0 0 1rem;
+    letter-spacing: -0.02em; }
+  h1 .accent { color: var(--accent); }
+  .lede { font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--text-dim); max-width: 42ch; margin: 0 0 .5rem; }
+  .lede .em { color: var(--text); font-style: italic; }
+  .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.15rem;
+    border-radius: 8px; font-weight: 600; font-size: .92rem; border: 1px solid transparent; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-dim); text-decoration: none; }
+  .btn-ghost { background: var(--bg-elev); color: var(--text); border-color: var(--border); }
+  .btn-ghost:hover { border-color: var(--text-dim); text-decoration: none; }
+
+  /* sections */
+  section { padding: 2.5rem 0; }
+  h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 0 0 .4rem; }
+  .sub { color: var(--text-dim); margin: 0 0 1.75rem; max-width: 60ch; }
+
+  /* code block */
+  .code { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius);
+    font-family: var(--mono); font-size: .85rem; overflow: hidden; }
+  .code-head { display: flex; align-items: center; justify-content: space-between;
+    padding: .5rem .85rem; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: .75rem; }
+  .code pre { margin: 0; padding: .9rem 1rem; overflow-x: auto; color: #e6edf3; }
+  .code .c { color: #6e7781; }
+  .code .p { color: var(--accent); }
+  .copy { background: none; border: 1px solid var(--border); color: var(--text-dim);
+    border-radius: 6px; padding: .2rem .55rem; font-size: .72rem; cursor: pointer; font-family: var(--mono); }
+  .copy:hover { color: var(--text); border-color: var(--text-dim); }
+  .copy.done { color: var(--ok); border-color: var(--ok); }
+
+  /* skill cards */
+  .grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.4rem; }
+  .card h3 { margin: 0 0 .5rem; font-family: var(--mono); font-size: 1.05rem; color: var(--text); }
+  .card p { margin: 0 0 1rem; color: var(--text-dim); font-size: .92rem; }
+  .card .ships { font-family: var(--mono); font-size: .78rem; color: var(--text-dim);
+    border-top: 1px solid var(--border); padding-top: .85rem; }
+  .card .ships code { color: var(--accent); background: var(--bg-elev2); padding: .1rem .35rem; border-radius: 4px; }
+  ul.catch { list-style: none; margin: 0 0 1rem; padding: 0; }
+  ul.catch li { position: relative; padding-left: 1.4rem; font-size: .9rem; color: var(--text-dim);
+    margin-bottom: .4rem; }
+  ul.catch li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  ul.catch li code { font-family: var(--mono); font-size: .82rem; color: var(--text);
+    background: var(--bg-elev2); padding: .05rem .3rem; border-radius: 4px; }
+
+  /* the bar */
+  .bar { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .bar { grid-template-columns: repeat(3, 1fr); } }
+  .bar .item { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; }
+  .bar .item h4 { margin: 0 0 .4rem; font-size: .98rem; }
+  .bar .item p { margin: 0; color: var(--text-dim); font-size: .88rem; }
+
+  /* roadmap */
+  .road { list-style: none; margin: 0; padding: 0; }
+  .road li { display: flex; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
+  .road li:last-child { border-bottom: 0; }
+  .road .st { font-family: var(--mono); color: var(--text-dim); flex-shrink: 0; }
+  .road code { font-family: var(--mono); color: var(--accent); }
+  .road .d { color: var(--text-dim); }
+
+  /* footer */
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 0 3rem; color: var(--text-dim); font-size: .88rem; }
+  footer .frow { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+  footer .frow a { color: var(--text-dim); }
+  footer .frow a:hover { color: var(--text); }
+  .ver { font-family: var(--mono); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <span class="brand"><span class="pre">$</span> dte-rails-toolkit</span>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#skills">Skills</a>
+      <a href="#install">Install</a>
+      <a href="#bar">The bar</a>
+      <a href="https://github.com/davidteren/dte-rails-toolkit">GitHub</a>
+      <button class="theme-btn" id="theme" aria-label="Toggle color theme" title="Toggle theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <section class="hero">
+      <span class="tag"><span class="dot" aria-hidden="true"></span> v0.1.1 · public · MIT</span>
+      <h1>Catch the bugs that<br>produce <span class="accent">no error.</span></h1>
+      <p class="lede">Runnable, deterministic Rails checkers. CI-friendly linters for the failures where the code runs, the tests pass, and something is <span class="em">just quietly wrong</span>.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#install">Install</a>
+        <a class="btn btn-ghost" href="https://github.com/davidteren/dte-rails-toolkit">View on GitHub</a>
+      </div>
+    </section>
+
+    <section id="what">
+      <h2>The deterministic layer</h2>
+      <p class="sub">Most of a Rails AI toolchain is LLM-driven — coders, reviewers. These are the other half: fast, exact, reproducible, gate-able in CI. They also run as a <strong>grounding pre-pass</strong> for the LLM reviewers in <a href="https://github.com/davidteren/dte-skills">dte-skills</a> before its lenses fire.</p>
+      <p class="sub">This repo is a <strong>staging home</strong>. Checkers land here first; once a category can stand on its own it graduates into a focused plugin — the way the Hotwire checkers became <a href="https://github.com/davidteren/hotwire-rails-toolkit">hotwire-rails-toolkit</a>.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="sub">Two shipped. Each script runs standalone against any Rails app and exits non-zero on findings.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>layer-boundary-lint</h3>
+          <p>Rails layering violations the architecture books describe but no tool gates:</p>
+          <ul class="catch">
+            <li><code>Current.</code> read in models</li>
+            <li><code>request</code>/<code>params</code> in the domain layer (services <em>and</em> interactors)</li>
+            <li>raw <code>.where/.order/.joins</code> in controllers/views</li>
+            <li>mailer/HTTP I/O in <code>after_*</code> callbacks</li>
+            <li>off-layer <code>Current</code> writes · oversized <code>Current</code></li>
+          </ul>
+          <div class="ships">Ships <code>lint_layer_boundaries.sh</code> (bash + python3) · reference guide</div>
+        </article>
+        <article class="card">
+          <h3>rails-test-smell-checker</h3>
+          <p>Test smells across Minitest <em>and</em> RSpec:</p>
+          <ul class="catch">
+            <li><code>sleep</code> in system tests</li>
+            <li>missing <code>WebMock.disable_net_connect!</code></li>
+            <li>stubbing the system under test</li>
+            <li><code>has_css?</code>/<code>has_content?</code> inside an assertion</li>
+            <li>caveated heuristics (Mystery Guest)</li>
+          </ul>
+          <div class="ships">Ships <code>lint_test_smells.sh</code> (python3) · reference guide</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2>Install</h2>
+      <p class="sub">As standalone tools, or as a Claude Code plugin.</p>
+      <div class="grid">
+        <div class="code">
+          <div class="code-head"><span>run the scripts directly</span><button class="copy" data-copy="skills/layer-boundary-lint/scripts/lint_layer_boundaries.sh path/to/rails-app
+skills/rails-test-smell-checker/scripts/lint_test_smells.sh path/to/rails-app">copy</button></div>
+          <pre><span class="c"># exits non-zero on findings — CI-friendly</span>
+skills/layer-boundary-lint/scripts/<span class="p">lint_layer_boundaries.sh</span> app/
+skills/rails-test-smell-checker/scripts/<span class="p">lint_test_smells.sh</span> app/</pre>
+        </div>
+        <div class="code">
+          <div class="code-head"><span>as a Claude Code plugin</span><button class="copy" data-copy="claude plugin marketplace add davidteren/dte-rails-toolkit
+claude plugin install dte-rails-toolkit@dte-rails-toolkit-marketplace">copy</button></div>
+          <pre>claude plugin marketplace add <span class="p">davidteren/dte-rails-toolkit</span>
+claude plugin install <span class="p">dte-rails-toolkit@dte-rails-toolkit-marketplace</span></pre>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:1.5rem"><code style="font-family:var(--mono);font-size:.85rem">layer-boundary-lint</code>: rules are individually skippable by label; <code style="font-family:var(--mono);font-size:.85rem">STRICT=1</code> fails on advisories; <code style="font-family:var(--mono);font-size:.85rem">CURRENT_ATTR_MAX</code> tunes the threshold. <code style="font-family:var(--mono);font-size:.85rem">rails-test-smell-checker</code>: high-confidence smells fail; heuristics only fail under <code style="font-family:var(--mono);font-size:.85rem">--strict</code>.</p>
+    </section>
+
+    <section id="bar">
+      <h2>The bar for adding a checker</h2>
+      <p class="sub">Three rules. A checker ships only if it clears all three.</p>
+      <div class="bar">
+        <div class="item">
+          <h4>Deterministic, names its ceiling</h4>
+          <p>Heuristic text/AST scans, not full parsers — each script says so. A clean run is a gate, not a proof.</p>
+        </div>
+        <div class="item">
+          <h4>Verified both ways</h4>
+          <p>Run against a real app (must be truthful — no false positives) and a synthetic broken case (must flag it).</p>
+        </div>
+        <div class="item">
+          <h4>False positives are the failure mode</h4>
+          <p>A rule that can't be made high-confidence cheaply is demoted to a caveated heuristic or dropped — never shipped loose.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <h2>Backlog</h2>
+      <p class="sub">Candidate checkers distilled from a review of 8 Rails reference books. <span class="st">☐ todo · ◐ parked · ▶ next</span></p>
+      <ul class="road">
+        <li><span class="st">☐</span> <div><code>rails-n1-guardrail-check</code> <span class="d">— assert N+1 <em>defenses exist</em> (config + narrow greps). Not a general detector.</span></div></li>
+        <li><span class="st">☐</span> <div><code>rails-csv-io</code> <span class="d">— streaming import/export template + 3-footgun checker (whole-file load, encoding/BOM, create!-in-loop).</span></div></li>
+        <li><span class="st">☐</span> <div><code>cable-stream-security</code> <span class="d">— Turbo-Stream/websocket hardening: signed stream ids, reject unauthorized subs, allowed origins.</span></div></li>
+        <li><span class="st">◐</span> <div><code>geocoding-guard</code> / <code>ruby-hotspot-finder</code> <span class="d">— likely fold into existing skills rather than ship standalone.</span></div></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap frow">
+    <span class="ver">dte-rails-toolkit · v0.1.1</span>
+    <a href="https://github.com/davidteren/dte-rails-toolkit">GitHub</a>
+    <a href="https://github.com/davidteren/dte-rails-toolkit/blob/main/LICENSE">MIT License</a>
+    <a href="https://github.com/davidteren/dte-skills">dte-skills</a>
+    <a href="https://github.com/davidteren/hotwire-rails-toolkit">hotwire-rails-toolkit</a>
+  </div>
+</footer>
+
+<script>
+  // theme: persist + respect system default
+  (function () {
+    var root = document.documentElement, btn = document.getElementById('theme');
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    if (saved) root.setAttribute('data-theme', saved);
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+      root.setAttribute('data-theme', 'light');
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+  // copy buttons
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      navigator.clipboard.writeText(b.dataset.copy).then(function () {
+        var t = b.textContent; b.textContent = 'copied ✓'; b.classList.add('done');
+        setTimeout(function () { b.textContent = t; b.classList.remove('done'); }, 1600);
+      });
+    });
+  });
+</script>
+</body>
+</html>
