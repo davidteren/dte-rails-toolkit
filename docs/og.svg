@@ -19,12 +19,12 @@
   </text>
 
   <!-- headline -->
-  <text x="80" y="280" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" fill="#e6edf3" letter-spacing="-2">Catch the bugs that</text>
-  <text x="80" y="380" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" letter-spacing="-2" xml:space="preserve"><tspan fill="#e6edf3">produce&#160; </tspan><tspan fill="#e74c3c">no error.</tspan></text>
+  <text x="80" y="280" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" fill="#e6edf3" letter-spacing="-2">Runnable Rails</text>
+  <text x="80" y="380" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" fill="#e74c3c" letter-spacing="-2">checker skills.</text>
 
   <!-- subhead -->
-  <text x="80" y="450" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">Runnable, deterministic Rails checkers. CI-friendly linters</text>
-  <text x="80" y="492" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">for the failures where the code runs and tests pass.</text>
+  <text x="80" y="450" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">Deterministic, CI-friendly linters that run alongside</text>
+  <text x="80" y="492" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" fill="#9aa7b4">the dte-skills Rails toolchain.</text>
 
   <!-- pills -->
   <g font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa7b4">
