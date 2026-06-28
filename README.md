@@ -6,6 +6,8 @@
 [![checkers](https://img.shields.io/badge/checkers-5-success.svg)](#skills)
 [![verified both ways](https://img.shields.io/badge/verified-both%20ways-success.svg)](#how-its-built-the-bar-for-adding-a-checker)
 
+[![dte-rails-toolkit site](./docs/screenshot.png)](https://davidteren.github.io/dte-rails-toolkit/)
+
 **A general-purpose toolkit of runnable, deterministic Rails checkers** — CI-friendly
 linters that catch the failures that produce *no error* (the code runs, the tests pass,
 something is just quietly wrong).
