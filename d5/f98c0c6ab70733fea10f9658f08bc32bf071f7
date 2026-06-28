@@ -1,0 +1,41 @@
+.claude-plugin/plugin.json
+  s_5f2c0b20dd2195::t_1acae11f2f863f 1-8
+LICENSE
+  s_a526102195a0a2::t_9ae39012e0f8f3 1-21
+skills/layer-boundary-lint/SKILL.md
+  s_a526102195a0a2::t_9ddca3d51750c5 1-81
+skills/layer-boundary-lint/references/layer-boundaries-guide.md
+  s_a526102195a0a2::t_54088405029f59 1-145
+skills/layer-boundary-lint/scripts/lint_layer_boundaries.sh
+  s_a526102195a0a2::t_2f619be326cec8 1-169
+skills/rails-test-smell-checker/SKILL.md
+  s_a526102195a0a2::t_886c1c113f4313 1-70
+skills/rails-test-smell-checker/references/test-smells-guide.md
+  s_a526102195a0a2::t_82ee5b0158241a 1-118
+skills/rails-test-smell-checker/scripts/lint_test_smells.sh
+  s_a526102195a0a2::t_2c4861bfacae97 1-204
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "d5f98c0c6ab70733fea10f9658f08bc32bf071f7",
+  "prompts": {},
+  "sessions": {
+    "s_5f2c0b20dd2195": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ddb3555-0c10-40f7-93bc-ed3970461a05",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    },
+    "s_a526102195a0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aafbb10f-22c1-4c10-99ee-920c290685ff",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    }
+  }
+}
