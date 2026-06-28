@@ -1,7 +1,7 @@
 {
   "name": "dte-rails-toolkit-marketplace",
   "metadata": {
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "dte-rails-toolkit — general-purpose runnable Rails checkers (deterministic linters), a staging home until a category graduates into its own plugin."
   },
   "owner": { "name": "David Teren" },
