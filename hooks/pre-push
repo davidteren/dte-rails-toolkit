@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Pre-push gate — skill-lint every SKILL.md in this repo (scripts/skill_lint.py).
+# A failing skill blocks the push.
+#
+# Enable once per clone:   git config core.hooksPath hooks
+# Bypass once:             git push --no-verify
+set -uo pipefail
+root="$(git rev-parse --show-toplevel)" || exit 1
+cd "$root" || exit 1
+command -v python3 >/dev/null || { echo "pre-push: python3 not found — skipping skill-lint"; exit 0; }
+[ -f scripts/skill_lint.py ] || { echo "pre-push: scripts/skill_lint.py missing — skipping"; exit 0; }
+python3 scripts/skill_lint.py
+rc=$?
+[ "$rc" -ne 0 ] && echo "pre-push: skill-lint failures above — push blocked (bypass: git push --no-verify)."
+exit "$rc"

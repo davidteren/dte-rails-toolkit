@@ -54,3 +54,17 @@ Bump the version in **both** `.claude-plugin/plugin.json` and `.claude-plugin/ma
 
 Distilled from a review of Rails reference books (palkan's *Layered Design for Rails*, thoughtbot's
 *Testing Rails*) in the analysis lineage; the selection rationale lives in `dte-skills:Books/learnings/00_INDEX.md`.
+
+## Skill-lint pre-push hook
+
+This repo ships a pre-push gate (`hooks/pre-push`) that runs `scripts/skill_lint.py` over every
+`SKILL.md` and blocks a push on any failure. The linter is a clean-room implementation of Anthropic's
+Agent Skills authoring rules (frontmatter present + kebab `name` matching the dir; `description` ≤ 1024
+chars and no XML tags; reference files ≤ 500 lines, a `## Contents` on any > 100 lines, every reference
+linked from SKILL.md by a real markdown link, links resolve). Enable it once per clone:
+
+```sh
+git config core.hooksPath hooks
+```
+
+Bypass a single push with `git push --no-verify`. Run it directly any time: `python3 scripts/skill_lint.py`.
