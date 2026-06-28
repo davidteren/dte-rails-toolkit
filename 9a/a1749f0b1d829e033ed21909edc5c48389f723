@@ -1,0 +1,59 @@
+skills/rails-n1-guardrail-check/scripts/lint_n1_guardrails.sh
+  s_a526102195a0a2::t_836b2e990f5ecf 86-95
+  s_a526102195a0a2::t_a1ea99516677da 119-121
+  s_a526102195a0a2::t_e333952ec1ee61 132-133
+  s_a526102195a0a2::t_516d9a487dbb7b 1-85,96-118,122-131,134-191
+STATUS.md
+  s_a526102195a0a2::t_1b513f9db7bbb3 41-45
+  s_a526102195a0a2::t_42c163e59624e7 12
+  s_a526102195a0a2::t_330649493d3aaa 23-25
+  s_a526102195a0a2::t_c2e08d067af0de 60-68
+skills/rails-csv-io/references/csv-io-guide.md
+  s_a526102195a0a2::t_3f3fe2d52765b5 1-190
+skills/cable-stream-security/scripts/lint_cable_security.sh
+  s_a526102195a0a2::t_b84366eb1d011c 1-208
+README.md
+  s_3a364d507b2bd3::t_60b86cf790cb3c 3
+  s_a526102195a0a2::t_2f814f208837fd 27-29
+  s_a526102195a0a2::t_0a88dba30011b2 6
+skills/cable-stream-security/references/cable-security-guide.md
+  s_a526102195a0a2::t_3bccf6f7d1e50c 1-181
+skills/rails-n1-guardrail-check/SKILL.md
+  s_a526102195a0a2::t_96c4e3c2709d58 1-105
+skills/rails-csv-io/SKILL.md
+  s_a526102195a0a2::t_5989ac82d4447b 1-85
+skills/rails-csv-io/scripts/lint_csv_io.sh
+  s_a526102195a0a2::t_41ce011dd4e831 1-209
+skills/cable-stream-security/SKILL.md
+  s_a526102195a0a2::t_0ad76497444d6c 1-94
+skills/rails-n1-guardrail-check/references/n1-guardrails-guide.md
+  s_a526102195a0a2::t_e40703d484d5bd 1-129
+.claude-plugin/marketplace.json
+  s_a526102195a0a2::t_83d9108f54784c 4
+.claude-plugin/plugin.json
+  s_a526102195a0a2::t_944e114d0876a2 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "9aa1749f0b1d829e033ed21909edc5c48389f723",
+  "prompts": {},
+  "sessions": {
+    "s_3a364d507b2bd3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "54f06e06-294c-465d-9951-ec50078666bb",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    },
+    "s_a526102195a0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aafbb10f-22c1-4c10-99ee-920c290685ff",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    }
+  }
+}
