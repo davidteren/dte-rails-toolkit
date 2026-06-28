@@ -162,7 +162,7 @@
 <main id="main">
   <div class="wrap">
     <section class="hero">
-      <span class="tag"><span class="dot" aria-hidden="true"></span> v0.1.1 · public · MIT</span>
+      <span class="tag"><span class="dot" aria-hidden="true"></span> v0.2.0 · public · MIT</span>
       <h1>Catch the bugs that<br>produce <span class="accent">no error.</span></h1>
       <p class="lede">Runnable, deterministic Rails checkers. CI-friendly linters for the failures where the code runs, the tests pass, and something is <span class="em">just quietly wrong</span>.</p>
       <div class="cta">
@@ -179,7 +179,7 @@
 
     <section id="skills">
       <h2>Skills</h2>
-      <p class="sub">Two shipped. Each script runs standalone against any Rails app and exits non-zero on findings.</p>
+      <p class="sub">Five shipped. Each script runs standalone against any Rails app and exits non-zero on findings.</p>
       <div class="grid">
         <article class="card">
           <h3>layer-boundary-lint</h3>
@@ -204,6 +204,37 @@
             <li>caveated heuristics (Mystery Guest)</li>
           </ul>
           <div class="ships">Ships <code>lint_test_smells.sh</code> (python3) · reference guide</div>
+        </article>
+        <article class="card">
+          <h3>rails-n1-guardrail-check</h3>
+          <p>Asserts N+1 <em>defenses exist</em> — not a general detector (Bullet/Prosopite own that):</p>
+          <ul class="catch">
+            <li>no <code>strict_loading</code> / detection gem wired</li>
+            <li><code>.count</code> on an association in views/loops</li>
+            <li>relation-breakers (<code>.order/.first/.pluck</code>) inside <code>.each</code></li>
+          </ul>
+          <div class="ships">Ships <code>lint_n1_guardrails.sh</code> (bash + python3) · reference guide</div>
+        </article>
+        <article class="card">
+          <h3>rails-csv-io</h3>
+          <p>CSV import/export footguns, plus a streaming importer + exporter template:</p>
+          <ul class="catch">
+            <li>whole-file <code>CSV.read</code> / <code>parse(File.read</code> (memory)</li>
+            <li>missing <code>encoding:</code> / BOM handling</li>
+            <li>bang-persist in a row loop — no transaction, no per-row error reporting</li>
+          </ul>
+          <div class="ships">Ships <code>lint_csv_io.sh</code> (bash + python3) · template · reference guide</div>
+        </article>
+        <article class="card">
+          <h3>cable-stream-security</h3>
+          <p>ActionCable / Turbo-Stream hardening:</p>
+          <ul class="catch">
+            <li><code>stream_from</code> without authorizing / <code>reject</code></li>
+            <li><code>constantize</code> on client-supplied <code>params</code>/<code>dataset</code></li>
+            <li>missing <code>allowed_request_origins</code></li>
+            <li>absent CSP <code>connect-src</code></li>
+          </ul>
+          <div class="ships">Ships <code>lint_cable_security.sh</code> (bash + python3) · reference guide</div>
         </article>
       </div>
     </section>
@@ -250,11 +281,11 @@ claude plugin install <span class="p">dte-rails-toolkit@dte-rails-toolkit-market
 
     <section id="roadmap">
       <h2>Backlog</h2>
-      <p class="sub">Candidate checkers distilled from a review of 8 Rails reference books. <span class="st">☐ todo · ◐ parked · ▶ next</span></p>
+      <p class="sub">Candidate checkers distilled from a review of 8 Rails reference books. <span class="st">✅ shipped · ◐ parked</span></p>
       <ul class="road">
-        <li><span class="st">☐</span> <div><code>rails-n1-guardrail-check</code> <span class="d">— assert N+1 <em>defenses exist</em> (config + narrow greps). Not a general detector.</span></div></li>
-        <li><span class="st">☐</span> <div><code>rails-csv-io</code> <span class="d">— streaming import/export template + 3-footgun checker (whole-file load, encoding/BOM, create!-in-loop).</span></div></li>
-        <li><span class="st">☐</span> <div><code>cable-stream-security</code> <span class="d">— Turbo-Stream/websocket hardening: signed stream ids, reject unauthorized subs, allowed origins.</span></div></li>
+        <li><span class="st">✅</span> <div><code>rails-n1-guardrail-check</code> <span class="d">— shipped in v0.2.0. Asserts N+1 defenses exist; not a general detector.</span></div></li>
+        <li><span class="st">✅</span> <div><code>rails-csv-io</code> <span class="d">— shipped in v0.2.0. Streaming import/export template + 3-footgun checker.</span></div></li>
+        <li><span class="st">✅</span> <div><code>cable-stream-security</code> <span class="d">— shipped in v0.2.0. ActionCable / Turbo-Stream hardening.</span></div></li>
         <li><span class="st">◐</span> <div><code>geocoding-guard</code> / <code>ruby-hotspot-finder</code> <span class="d">— likely fold into existing skills rather than ship standalone.</span></div></li>
       </ul>
     </section>
@@ -263,7 +294,7 @@ claude plugin install <span class="p">dte-rails-toolkit@dte-rails-toolkit-market
 
 <footer>
   <div class="wrap frow">
-    <span class="ver">dte-rails-toolkit · v0.1.1</span>
+    <span class="ver">dte-rails-toolkit · v0.2.0</span>
     <a href="https://github.com/davidteren/dte-rails-toolkit">GitHub</a>
     <a href="https://github.com/davidteren/dte-rails-toolkit/blob/main/LICENSE">MIT License</a>
     <a href="https://github.com/davidteren/dte-skills">dte-skills</a>
