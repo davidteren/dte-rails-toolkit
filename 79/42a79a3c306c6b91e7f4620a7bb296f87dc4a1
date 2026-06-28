@@ -1,0 +1,19 @@
+scripts/run-checks.sh
+  s_a526102195a0a2::t_88cfba94c553a8 1-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "7942a79a3c306c6b91e7f4620a7bb296f87dc4a1",
+  "prompts": {},
+  "sessions": {
+    "s_a526102195a0a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aafbb10f-22c1-4c10-99ee-920c290685ff",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "davidteren <drteren@gmail.com>"
+    }
+  }
+}
