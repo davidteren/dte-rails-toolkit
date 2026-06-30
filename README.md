@@ -21,17 +21,15 @@
 
 <sub>Dark / light theme toggle on the <a href="https://davidteren.github.io/dte-rails-toolkit/">live site</a> — persists your choice, respects <code>prefers-color-scheme</code>.</sub>
 
-**A general-purpose toolkit of runnable, deterministic Rails checkers** — CI-friendly
-linters that catch the failures that produce *no error* (the code runs, the tests pass,
-something is just quietly wrong).
+**A collection of runnable, deterministic Rails checker skills** that run alongside the
+[dte-skills](https://github.com/davidteren/dte-skills) toolchain. Each one is a CI-friendly
+linter — fast, exact, reproducible, gate-able in CI.
 
-This repo is a **staging home**. Individual checkers and skills land here first; once a
-category has enough to stand on its own, it graduates into a focused plugin — the way the
-Hotwire checkers became [hotwire-rails-toolkit](https://github.com/davidteren/hotwire-rails-toolkit).
-The rest of a typical Rails AI toolchain is LLM-driven (coders, reviewers); these are the
-**deterministic** layer — fast, exact, reproducible, gate-able in CI, and a grounding
-pre-pass for the LLM reviewers (e.g. [dte-skills](https://github.com/davidteren/dte-skills)
-runs them before its lenses).
+Most of a Rails AI toolchain is LLM-driven (coders, reviewers); these are the
+**deterministic** half — and a grounding pre-pass dte-skills runs before its review lenses.
+This repo is also a **staging home**: checkers land here first, and once a category has
+enough to stand on its own it graduates into a focused plugin — the way the Hotwire checkers
+became [hotwire-rails-toolkit](https://github.com/davidteren/hotwire-rails-toolkit).
 
 ## Skills
 
